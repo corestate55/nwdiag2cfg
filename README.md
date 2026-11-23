@@ -12,6 +12,7 @@ AI を介さず、`図からコンフィグ変換ナレッジ.md`（v1.1）の�
 使い方の例とテストで使っている `diagrams.drawio.svg` は、書籍『ネットワーク図の描き方入門』のサポートページ
 （[ネットワーク図の描き方入門 | 日経BOOKプラス](https://bookplus.nikkei.com/atcl/catalog/25/11/21/02321/)）にある
 「ネットワーク構成図、アイコンデータのダウンロード」からダウンロードできるデータです。このリポジトリには含めていません。
+この図を nwdiag2cfg・AI（Claude / ChatGPT）で変換した結果は [nwdiag2cfg_samples](https://github.com/corestate55/nwdiag2cfg_samples) にあります。
 
 ## 使い方
 

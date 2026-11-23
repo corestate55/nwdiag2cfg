@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# nwdiag2cfg ラッパー: リポジトリを置いた場所から python3 -m nwdiag2cfg を実行する
+set -euo pipefail
+HERE="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)"
+PY="${PYTHON:-python3}"
+if ! "$PY" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 11) else 1)'; then
+  echo "nwdiag2cfg: Python 3.11 以上が必要です（PYTHON=... で指定できます）" >&2
+  exit 2
+fi
+PYTHONPATH="$HERE${PYTHONPATH:+:$PYTHONPATH}" exec "$PY" -m nwdiag2cfg "$@"

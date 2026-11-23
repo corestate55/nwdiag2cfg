@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nwdiag2cfg"
+dynamic = ["version"]
+description = "物理・論理合成図（drawio）から NW 機器コンフィグとレビュー指摘を生成する CLI"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+nwdiag2cfg = "nwdiag2cfg.cli:main"
+
+[tool.setuptools]
+packages = ["nwdiag2cfg"]
+
+[tool.setuptools.dynamic]
+version = {attr = "nwdiag2cfg.__version__"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

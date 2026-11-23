@@ -1,0 +1,58 @@
+# nwdiag2cfg 既定値ファイル（プロジェクトごとの設計ルール）の例
+#   nwdiag2cfg -f 図.drawio.svg -t 物理・論理 -p project.toml
+# 書かなかった項目はナレッジ v1.1 の既定値を使い、configs.md 5章「既定値を使った項目」に一覧で出る。
+# 図と既定値ファイルが食い違うときは、既定値ファイルを優先する（設計計画 D3）。
+
+[defaults]
+lag_mode = "active"               # active（LACP）/ on（static）
+fhrp_protocol = "legend"          # legend（凡例の表記に従う）/ vrrp / hsrp
+fhrp_format = "vrrpv3"            # vrrpv3 / legacy（旧 IOS の vrrp N ip ...）
+fhrp_priority_primary = 110       # 01号機の優先度
+fhrp_preempt = true
+fhrp_group = "vlan_id"            # グループ番号 = VLAN ID（1-255 を超えると <TBD> と V-07）
+mgmt_vrf_name = "mgmt"            # 図に vrf の箱が無いときの管理 VRF 名
+trunk_extra = []                  # trunk に足すコマンド。例: ["switchport nonegotiate"]
+unused_ports = "none"             # none（書かない）/ shutdown
+stp_mode = "rapid-pvst"
+dangling_distance = 10            # 未接続線の端点から接続先候補までの距離（px）
+
+# 機種の記法を名前のパターンで指定する（iosxe / isr / asa）。図の機種名から判定できないときに使う。
+[platform]
+"*-fw*" = "asa"
+"*-rt*" = "isr"
+
+# 拠点のアドレスブロックと拠点名（「to東京」などの経路ラベルの解決に使う）
+[sites.tk1]
+name = "東京"
+block = "172.17.0.0/16"
+
+[sites.os1]
+name = "大阪"
+block = "172.18.0.0/16"
+
+# 集約 VLAN（VLAN300-399 のような範囲）の払い出し単位。図の注記より優先する。
+#   unit = "フロア" など / "none"（払い出さない）
+[aggregates.OFFICE_Fn]
+unit = "フロア"
+
+# 静的経路。図（論理構成図の矢印）より優先する。
+#   next_hop（IP）か next_hop_device（機器名のパターン。共通セグメント上の IP / VIP を使う）
+[[routes]]
+device = "tk1-rt01"
+dest = "172.18.0.0/16"
+next_hop = "172.16.0.2"
+
+[[routes]]
+device = "os1-rt01"
+dest = "172.17.0.0/16"
+next_hop = "172.16.0.1"
+
+# 図に IP が無い（.x）インターフェースのアドレス。キーは "機器名:セグメント名"
+[ipam]
+"tk1-rt01:INTER-BLDG" = "172.16.0.1"
+"os1-rt01:INTER-BLDG" = "172.16.0.2"
+
+# 管理サービス（無いと ntp / logging は <TBD>）
+[services]
+ntp = ["172.17.3.10"]
+syslog = ["172.17.3.11"]

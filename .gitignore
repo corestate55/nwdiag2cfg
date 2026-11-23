@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.venv/
+.pytest_cache/
+# 実行結果（既定の出力先は ./<入力ファイル名>/）
+/out/
+/output/

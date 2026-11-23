@@ -7,6 +7,12 @@ AI を介さず、`図からコンフィグ変換ナレッジ.md`（v1.1）の�
 - 出力: コンフィグ（Cisco IOS-XE / ISR / ASA 記法）、変換レポート、指摘一覧（Markdown と CSV）
 - 動作環境: Linux、bash、Python 3.11 以上（標準ライブラリのみ。追加パッケージ不要）
 
+## サンプルの図
+
+使い方の例とテストで使っている `diagrams.drawio.svg` は、書籍『ネットワーク図の描き方入門』のサポートページ
+（[ネットワーク図の描き方入門 | 日経BOOKプラス](https://bookplus.nikkei.com/atcl/catalog/25/11/21/02321/)）にある
+「ネットワーク構成図、アイコンデータのダウンロード」からダウンロードできるデータです。このリポジトリには含めていません。
+
 ## 使い方
 
 ```bash
@@ -77,7 +83,7 @@ python3 -m pytest -q          # または python3 -m unittest discover -s tests 
 python3 tests/fixtures/make_fixtures.py   # 合成図 tests/fixtures/lab.drawio を作り直す
 ```
 
-`tests/test_samples.py` は書籍・セミナーの図での回帰テストです。図のファイルが無い環境ではスキップします
+`tests/test_samples.py` は書籍・セミナーの図での回帰テストです（書籍の図の入手先は「サンプルの図」を参照）。図のファイルが無い環境ではスキップします
 （場所は環境変数 `NWDIAG2CFG_BOOK` / `NWDIAG2CFG_SEMINAR` で指定）。
 
 ソースの構成:

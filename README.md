@@ -30,7 +30,21 @@ bin/nwdiag2cfg -f diagrams.drawio.svg -t 物理・論理合成図_4C -p project.
   --prev-review diagrams.prev/review.csv --force
 ```
 
-`pip install .` すると `nwdiag2cfg` コマンドとしても使えます。`python3 -m nwdiag2cfg ...` でも動きます。
+インストールは不要です。`git clone` したディレクトリの `bin/nwdiag2cfg` をそのまま実行できます（標準ライブラリだけで動きます）。
+`nwdiag2cfg` コマンドとしてどこからでも使いたい場合は、次のどれかでインストールします。
+Ubuntu 23.04 以降・Debian 12 以降（WSL2 を含む）では、システムの Python に直接 `pip install .` すると
+`externally-managed-environment`（PEP 668）で止まるため、pipx か venv を使ってください。
+
+```bash
+# pipx（おすすめ。sudo apt install pipx && pipx ensurepath）
+pipx install .
+
+# venv
+python3 -m venv .venv && .venv/bin/pip install . && .venv/bin/nwdiag2cfg --version
+
+# インストールせずにパスを通す
+ln -s "$PWD/bin/nwdiag2cfg" ~/.local/bin/nwdiag2cfg
+```
 
 | オプション | 内容 |
 |---|---|

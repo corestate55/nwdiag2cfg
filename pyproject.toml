@@ -8,6 +8,7 @@ dynamic = ["version"]
 description = "物理・論理合成図（drawio）から NW 機器コンフィグとレビュー指摘を生成する CLI"
 readme = "README.md"
 requires-python = ">=3.11"
+license = {text = "MIT"}
 dependencies = []
 
 [project.scripts]

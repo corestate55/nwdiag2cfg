@@ -94,3 +94,7 @@ python3 tests/fixtures/make_fixtures.py   # 合成図 tests/fixtures/lab.drawio 
 | `selfcheck.py` | 生成したコンフィグを読み直して図と突き合わせる（V-08 / V-09 / L-07） |
 | `report.py` | configs.md / review.md / review.csv |
 | `project.py` | 既定値ファイル（TOML）とナレッジの既定値 |
+
+## ライセンス
+
+MIT License（[LICENSE](LICENSE)）
